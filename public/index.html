@@ -41,7 +41,12 @@
             socket.on('userJoined',(user)=>{
                 addmessage(`${user} has joined the chat`)
             })
+            socket.on('userList',(users)=>{
+                usersList.innerHTML=users.map(user=>`<li>${user}</li>`).join("")
+            })
+            // handle form submission
             
+
             function addmessage(input){
                 const messageElement=document.createElement('div')
                 messageElement.textContent=input;
