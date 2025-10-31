@@ -35,7 +35,7 @@
 
             const userName=prompt('enter your username')
 
-            //emit an event from client side that will be listened to server side
+            //emit a joining event from client side that will be listened to server side
             socket.emit('join',userName)
 
             socket.on('userJoined',(user)=>{
@@ -44,8 +44,24 @@
             socket.on('userList',(users)=>{
                 usersList.innerHTML=users.map(user=>`<li>${user}</li>`).join("")
             })
+
+            //listen chat message event from server
+            socket.on('chatMessage',(message)=>{
+                addmessage(`${message.userName}:${message.text}`)
+            })
+
             // handle form submission
-            
+            messageForm.addEventListener('submit',(event)=>{
+                event.preventDefault();
+                const extractMessageText=messageInput.value.trim();
+                if(extractMessageText){
+                    socket.emit('chatMessage',{
+                        userName, text:extractMessageText
+                    })
+                    messageInput.value=""
+                }
+
+            })
 
             function addmessage(input){
                 const messageElement=document.createElement('div')

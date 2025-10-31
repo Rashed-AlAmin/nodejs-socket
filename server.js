@@ -30,8 +30,12 @@ io.on('connection',(socket)=>{
     })
 
     //handle incoming chat messages
-
+    socket.on('chatMessage',(message)=>{
+        //broadcast the chat to all
+         io.emit('chatMessage',message)
+    })
     //handle user disconnection
+    
 })
 
 server.listen(process.env.PORT,()=>{
