@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>chat app</title>
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
         <div id="user-list">
@@ -33,7 +35,11 @@
             const messageForm=document.getElementById('message-form')
             const messageInput=document.getElementById('message-input')
 
-            const userName=prompt('enter your username')
+            let userName = null;
+            while (!userName || userName.trim() === "") {
+                 userName = prompt("Enter your username:");
+            }
+
 
             //emit a joining event from client side that will be listened to server side
             socket.emit('join',userName)
