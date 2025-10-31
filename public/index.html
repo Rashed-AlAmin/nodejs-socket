@@ -41,6 +41,9 @@
             socket.on('userJoined',(user)=>{
                 addmessage(`${user} has joined the chat`)
             })
+            socket.on('userLeft',(user)=>{
+                addmessage(`${user} has left the chat`)
+            })
             socket.on('userList',(users)=>{
                 usersList.innerHTML=users.map(user=>`<li>${user}</li>`).join("")
             })
